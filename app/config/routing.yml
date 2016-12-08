@@ -1,0 +1,7 @@
+map:
+    resource: "@MapBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

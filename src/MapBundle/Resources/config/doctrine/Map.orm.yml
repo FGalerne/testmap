@@ -1,0 +1,36 @@
+MapBundle\Entity\Map:
+    type: entity
+    table: null
+    repositoryClass: MapBundle\Repository\MapRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+        prenom:
+            type: string
+            length: 255
+        adresse:
+            type: string
+            length: 255
+        cp:
+            type: string
+            length: 255
+        ville:
+            type: string
+            length: 255
+        lat:
+            type: string
+            length: 255
+            nullable: true
+        lgt:
+            type: string
+            length: 255
+            nullable: true
+
+    lifecycleCallbacks: {  }

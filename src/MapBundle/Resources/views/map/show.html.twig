@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Map</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ map.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ map.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ map.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ map.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Cp</th>
+                <td>{{ map.cp }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ map.ville }}</td>
+            </tr>
+            <tr>
+                <th>Lat</th>
+                <td>{{ map.lat }}</td>
+            </tr>
+            <tr>
+                <th>Lgt</th>
+                <td>{{ map.lgt }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('map_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('map_edit', { 'id': map.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

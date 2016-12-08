@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Map creation</h1>
+{{ form_start(form, {'method': 'POST'}) }}
+<form>
+    <div class="form-group row">
+        <label for="example-text-input" class="col-xs-1 col-form-label">{{ form_label(form.nom) }}</label>
+        <div class="col-xs-3">
+            {{ form_widget(form.nom, {'attr': {'class':'form-control', 'name':'nom'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-text-input" class="col-xs-1 col-form-label">{{ form_label(form.prenom) }}</label>
+        <div class="col-xs-3">
+            {{ form_widget(form.prenom, {'attr': {'class':'form-control', 'name':'prenom'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-text-input" class="col-xs-1 col-form-label">{{ form_label(form.adresse) }}</label>
+        <div class="col-xs-3">
+            {{ form_widget(form.adresse, {'attr': {'class':'form-control', 'name':'adresse'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-text-input" class="col-xs-1 col-form-label">{{ form_label(form.cp) }}</label>
+        <div class="col-xs-3">
+            {{ form_widget(form.cp, {'attr': {'class':'form-control', 'name':'cp'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-text-input" class="col-xs-1 col-form-label">{{ form_label(form.ville) }}</label>
+        <div class="col-xs-3">
+            {{ form_widget(form.ville, {'attr': {'class':'form-control', 'name':'ville'}}) }}
+        </div>
+    </div>
+
+
+    <input type="submit" value="Envoyer" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('map_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

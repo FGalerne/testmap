@@ -1,0 +1,7 @@
+map_map:
+    resource: "@MapBundle/Resources/config/routing/map.yml"
+    prefix:   /map
+
+map_homepage:
+    path:     /
+    defaults: { _controller: MapBundle:Default:index }
