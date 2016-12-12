@@ -41,20 +41,8 @@ class MapController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($map);
-            $em->flush($map);
-
             /* API */
-            $repository = $this
-                ->getDoctrine()
-                ->getRepository('MapBundle:Map')
-            ;
 
-            $recup = $repository->findOneBy(array(
-                'id'=>'33',
-            ));
 
             $adresse = str_replace(' ','%20',$map->getAdresse());
             $cp = $map->getCp();
