@@ -39,20 +39,6 @@ class MapController extends Controller
         $form = $this->createForm('MapBundle\Form\MapType', $map);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $formgit ()."&key=AIzaSyBSFjZGurwwEtOnMOg1mKgJgS3WcP8ucrk";
-
-<<<<<<< HEAD
-=======
-            /* API */
-            $repository = $this
-                ->getDoctrine()
-                ->getRepository('MapBundle:Map')
-            ;
-
-            $recup = $repository->findOneBy(array(
-                'id'=>'33',
-            ));
-
             $adresse = str_replace(' ','%20',$map->getAdresse());
             $cp = $map->getCp();
             $ville = $map->getVille();
@@ -60,7 +46,7 @@ class MapController extends Controller
 
 
             $url = "https://maps.google.com/maps/api/geocode/json?address=".$adresse_totale."&key=AIzaSyBSFjZGurwwEtOnMOg1mKgJgS3WcP8ucrk";
->>>>>>> 9f2b7d2
+
 
 // get the json response
             $resp_json = file_get_contents($url);
@@ -89,14 +75,6 @@ class MapController extends Controller
                     $em->flush($map);
 
                 }
-
-
-
-
-
-
-
-
 
             }
 
