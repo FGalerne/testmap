@@ -40,9 +40,67 @@ class MapController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($map);
             $em->flush($map);
+
+            /* API */
+            $repository = $this
+                ->getDoctrine()
+                ->getRepository('MapBundle:Map')
+            ;
+
+            $recup = $repository->findOneBy(array(
+                'id'=>'33',
+            ));
+            echo '<pre>';
+            var_dump($recup);
+            echo '</pre>';
+            $adresse = $map->getAdresse();
+            $cp = $map->getCp();
+            $ville = $map->getVille();
+            $adresse_totale = $adresse .' '. $cp .' '. $ville;
+            echo '<pre>';
+            var_dump($adresse_totale);
+            echo '</pre>';
+            die;
+            /*$request = $this->get('request');
+            echo '<pre>';
+            var_dump($this->get(['request'][0]['mapbundle_map']));
+            echo '</pre>';
+            $address = $request->get('adresse').' '.$request->get('cp').' '.$request->get('ville');*/
+            $url = "https://maps.google.com/maps/api/geocode/json?address=".$adresse_totale."&key=AIzaSyBSFjZGurwwEtOnMOg1mKgJgS3WcP8ucrk";
+
+// get the json response
+            $resp_json = file_get_contents($url);
+
+// decode the json
+            $resp = json_decode($resp_json, true);
+
+// response status will be 'OK', if able to geocode given address
+            if ($resp['status'] == 'OK') {
+
+                // get the important data
+                $lat = $resp['results'][0]['geometry']['location']['lat'];
+                $lgt = $resp['results'][0]['geometry']['location']['lng'];
+
+
+                // verify if data is complete
+                if ($lat && $lgt) {
+                    $map->setLat($lat);
+                    $map->setLgt($lgt);
+
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($map);
+                    $em->flush($map);
+
+                }
+                /*FIN API*/
+
+            }
 
             return $this->redirectToRoute('map_show', array('id' => $map->getId()));
         }
