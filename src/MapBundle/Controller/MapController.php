@@ -55,22 +55,13 @@ class MapController extends Controller
             $recup = $repository->findOneBy(array(
                 'id'=>'33',
             ));
-            echo '<pre>';
-            var_dump($recup);
-            echo '</pre>';
-            $adresse = $map->getAdresse();
+
+            $adresse = str_replace(' ','%20',$map->getAdresse());
             $cp = $map->getCp();
             $ville = $map->getVille();
-            $adresse_totale = $adresse .' '. $cp .' '. $ville;
-            echo '<pre>';
-            var_dump($adresse_totale);
-            echo '</pre>';
-            die;
-            /*$request = $this->get('request');
-            echo '<pre>';
-            var_dump($this->get(['request'][0]['mapbundle_map']));
-            echo '</pre>';
-            $address = $request->get('adresse').' '.$request->get('cp').' '.$request->get('ville');*/
+            $adresse_totale = $adresse .'%20'. $cp .'%20'. $ville;
+
+
             $url = "https://maps.google.com/maps/api/geocode/json?address=".$adresse_totale."&key=AIzaSyBSFjZGurwwEtOnMOg1mKgJgS3WcP8ucrk";
 
 // get the json response
