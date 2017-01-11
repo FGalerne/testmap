@@ -45,12 +45,15 @@ class MapController extends Controller
 
 
             $adresse = str_replace(' ','%20',$map->getAdresse());
+
             $cp = $map->getCp();
+
             $ville = $map->getVille();
             $adresse_totale = $adresse .'%20'. $cp .'%20'. $ville;
 
 
             $url = "https://maps.google.com/maps/api/geocode/json?address=".$adresse_totale."&key=AIzaSyBSFjZGurwwEtOnMOg1mKgJgS3WcP8ucrk";
+       
 
 // get the json response
             $resp_json = file_get_contents($url);
@@ -89,14 +92,14 @@ class MapController extends Controller
             'form' => $form->createView(),
         ));
     }
-        /*----------------------------------- fin du code généré----------------------------*/
+    /*----------------------------------- fin du code généré----------------------------*/
 
 
-        /**
-         * Finds and displays a map entity.
-         *
-         */
-        public function showAction(Map $map)
+    /**
+     * Finds and displays a map entity.
+     *
+     */
+    public function showAction(Map $map)
     {
         $deleteForm = $this->createDeleteForm($map);
 
@@ -106,11 +109,11 @@ class MapController extends Controller
         ));
     }
 
-        /**
-         * Displays a form to edit an existing map entity.
-         *
-         */
-        public function editAction(Request $request, Map $map)
+    /**
+     * Displays a form to edit an existing map entity.
+     *
+     */
+    public function editAction(Request $request, Map $map)
     {
         $deleteForm = $this->createDeleteForm($map);
         $editForm = $this->createForm('MapBundle\Form\MapType', $map);
@@ -129,11 +132,11 @@ class MapController extends Controller
         ));
     }
 
-        /**
-         * Deletes a map entity.
-         *
-         */
-        public function deleteAction(Request $request, Map $map)
+    /**
+     * Deletes a map entity.
+     *
+     */
+    public function deleteAction(Request $request, Map $map)
     {
         $form = $this->createDeleteForm($map);
         $form->handleRequest($request);
@@ -147,18 +150,18 @@ class MapController extends Controller
         return $this->redirectToRoute('map_index');
     }
 
-        /**
-         * Creates a form to delete a map entity.
-         *
-         * @param Map $map The map entity
-         *
-         * @return \Symfony\Component\Form\Form The form
-         */
-        private function createDeleteForm(Map $map)
+    /**
+     * Creates a form to delete a map entity.
+     *
+     * @param Map $map The map entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Map $map)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('map_delete', array('id' => $map->getId())))
             ->setMethod('DELETE')
             ->getForm();
     }
-    }
+}

@@ -2,56 +2,10 @@
 
 {% block body %}
 <h1>La map</h1>
-    <div id="map" style="width:50%; height:300px;"></div>
+    <div id="map" style="width:50%; height:450px;"></div>
     <div id="map2" style="width:50%; height:300px;"></div>
 
-    {#  <h1>Maps list</h1>
 
-      <table>
-          <thead>
-              <tr>
-                  <th>Id</th>
-                  <th>Nom</th>
-                  <th>Prenom</th>
-                  <th>Adresse</th>
-                  <th>Cp</th>
-                  <th>Ville</th>
-                  <th>Lat</th>
-                  <th>Lgt</th>
-                  <th>Actions</th>
-              </tr>
-          </thead>
-          <tbody>
-          {% for map in maps %}
-              <tr>
-                  <td><a href="{{ path('map_show', { 'id': map.id }) }}">{{ map.id }}</a></td>
-                  <td>{{ map.nom }}</td>
-                  <td>{{ map.prenom }}</td>
-                  <td>{{ map.adresse }}</td>
-                  <td>{{ map.cp }}</td>
-                  <td>{{ map.ville }}</td>
-                  <td>{{ map.lat }}</td>
-                  <td>{{ map.lgt }}</td>
-                  <td>
-                      <ul>
-                          <li>
-                              <a href="{{ path('map_show', { 'id': map.id }) }}">show</a>
-                          </li>
-                          <li>
-                              <a href="{{ path('map_edit', { 'id': map.id }) }}">edit</a>
-                          </li>
-                      </ul>
-                  </td>
-              </tr>
-          {% endfor %}
-          </tbody>
-      </table>
-
-      <ul>
-          <li>
-              <a href="{{ path('map_new') }}">Create a new map</a>
-          </li>
-      </ul>#}
 {% endblock %}
 
 {% block javascripts %}
@@ -64,13 +18,13 @@
         console.log(adresse);  var_dump en JS#}
         var locations = [
             {% for map in maps %}
-            ['{{ map.cp }}', {{ map.lat }}, {{ map.lgt }}],
+            ['{{ map.cp }}', '{{ map.lat }}', '{{ map.lgt }}'],
             {% endfor %}
 
         ];
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 5,
-            center: new google.maps.LatLng(48.862725, 12.287592),
+            zoom: 6,
+            center: new google.maps.LatLng(46.811434, 1.6867790000000014),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         var infowindow = new google.maps.InfoWindow();
@@ -100,23 +54,26 @@
 
         ];
         var map2 = new google.maps.Map(document.getElementById('map2'), {
+            {% for map in maps %}
             zoom: 14,
-            center: new google.maps.LatLng(48.862725, 12.287592),
+            center: new google.maps.LatLng({{ map.lat }}, {{ map.lgt }}),
             mapTypeId: google.maps.MapTypeId.ROADMAP
+            {% endfor %}
         });
         var infowindow = new google.maps.InfoWindow();
         var marker, i;
         for (i = 0; i < locations.length; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                map: map
+                map: map2
             });
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
                     infowindow.setContent(locations[i][0]);
-                    infowindow.open(map, marker);
+                    infowindow.open(map2, marker);
                 }
             })(marker, i));
         }
+
     </script>
 {% endblock %}
